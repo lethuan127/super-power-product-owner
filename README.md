@@ -7,7 +7,7 @@ Tiếng Việt: [README.vi.md](./README.vi.md)
 Claude skills that take the repeat work off a Product Owner's week. Each project gets a small
 wiki that grows while you work. The skills read it, so their output uses your product's words.
 
-Works for any company and any product. Version 0.1.0 has the base and the two first jobs.
+Works for any company and any product. Version 0.2.0 has the base, the two first jobs, and a feedback skill.
 
 ## Install
 
@@ -74,5 +74,9 @@ Checks and rules for a change: [CONTRIBUTING.md](./CONTRIBUTING.md). Security re
 
 ## Versions
 
+- **0.2.0:** `send-feedback` turns the user's feedback into a GitHub issue, after a "yes" and
+  with private data removed. Output follows the project language; `core/locales/vi.md` sets the
+  Vietnamese headings, number and date formats. `setup-project` tells the user the language and
+  how to change it. Open-source files: LICENSE, CONTRIBUTING, SECURITY, issue forms, CI.
 - **0.1.0:** first version. Project wiki (setup, add, ask), `write-guide`, `compare-lists`, and
   the `core` rules.

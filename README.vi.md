@@ -7,7 +7,7 @@ Bộ kỹ năng cho Claude, giúp Product Owner (PO) bớt việc lặp lại m�
 Mỗi dự án có một "wiki dự án". Wiki là vài trang ghi chú do Claude tự viết và cập nhật trong lúc
 bạn làm việc. Claude đọc wiki này, nên kết quả dùng đúng từ ngữ của sản phẩm bạn.
 
-Plugin dùng được cho mọi công ty và mọi sản phẩm. Bản 0.1.0 có phần nền và 2 việc đầu tiên.
+Plugin dùng được cho mọi công ty và mọi sản phẩm. Bản 0.2.0 có phần nền, 2 việc đầu tiên, và kỹ năng gửi góp ý.
 
 ## Cài đặt (làm một lần, khoảng 5 phút)
 
