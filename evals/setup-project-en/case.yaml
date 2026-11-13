@@ -1,0 +1,56 @@
+schema_version: "1.1"
+name: setup-project-en
+tags: [setup]
+runs: 2
+execution:
+  prompt: |
+    set up project Order System
+  max_turns: 30
+  timeout_seconds: 600
+  allowed_tools: [Skill, Read, Write, Edit, Glob, Grep, Bash]
+graders:
+  - name: fired-setup-project
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?setup-project"'
+    arm: with-only
+  - name: claude-md
+    type: file_exists
+    path: "CLAUDE.md"
+    exists: true
+  - name: index-md
+    type: file_exists
+    path: "index.md"
+    exists: true
+  - name: log-md
+    type: file_exists
+    path: "log.md"
+    exists: true
+  - name: schema-heading
+    type: regex
+    target: {source: file, path: CLAUDE.md}
+    pattern: '^# Project wiki: Order System'
+    flags: "m"
+    match: contains
+    weight: 1
+  - name: log-setup-line
+    type: regex
+    target: {source: file, path: log.md}
+    pattern: '^## \[\d{4}-\d{2}-\d{2}\] setup \|'
+    flags: "m"
+    match: contains
+    weight: 1
+  - name: no-wiki-folder
+    type: file_exists
+    path: "wiki/**"
+    exists: false
+  - name: no-sources-folder
+    type: file_exists
+    path: "sources/**"
+    exists: false
+  - name: ready-message
+    type: llm
+    focus: last_message
+    weight: 1
+    criteria: |
+      The reply says the project is ready, offers to take a doc or link, and gives example requests. It asks no required question.

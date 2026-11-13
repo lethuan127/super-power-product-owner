@@ -1,0 +1,24 @@
+schema_version: "1.1"
+name: ask-project-missing
+tags: [wiki]
+runs: 2
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    What did we decide about discounts for VIP customers?
+  max_turns: 15
+  timeout_seconds: 600
+  allowed_tools: [Skill, Read, Write, Edit, Glob, Grep, Bash]
+graders:
+  - name: fired-ask-project
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?ask-project"'
+    arm: with-only
+  - name: says-missing
+    type: llm
+    focus: last_message
+    weight: 1
+    criteria: |
+      The answer clearly says the project wiki does not have a decision on VIP discounts. It does not invent a project decision. Any general advice is labeled as not from the project.

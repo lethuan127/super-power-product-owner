@@ -1,0 +1,26 @@
+name: Bug
+description: A skill did something wrong.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "This page is public. Do not paste company names, customer data, amounts or people's names."
+  - type: input
+    id: skill
+    attributes: {label: Skill, placeholder: compare-lists}
+    validations: {required: true}
+  - type: input
+    id: version
+    attributes: {label: Plugin version and app, placeholder: "0.2.0, Cowork"}
+  - type: textarea
+    id: asked
+    attributes: {label: What the user asked}
+    validations: {required: true}
+  - type: textarea
+    id: happened
+    attributes: {label: What happened}
+    validations: {required: true}
+  - type: textarea
+    id: expected
+    attributes: {label: What the user expected}
+    validations: {required: true}

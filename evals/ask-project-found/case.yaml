@@ -1,0 +1,38 @@
+schema_version: "1.1"
+name: ask-project-found
+tags: [wiki]
+runs: 2
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    What did we decide about refunds?
+  max_turns: 15
+  timeout_seconds: 600
+  allowed_tools: [Skill, Read, Write, Edit, Glob, Grep, Bash]
+graders:
+  - name: fired-ask-project
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?ask-project"'
+    arm: with-only
+  - name: amount
+    type: regex
+    target: last_message
+    pattern: '5[.,]?000[.,]?000'
+    flags: "i"
+    match: contains
+    weight: 1
+  - name: cites-page
+    type: regex
+    target: last_message
+    pattern: 'decisions\.md'
+    flags: "i"
+    match: contains
+    weight: 1
+  - name: correct
+    type: llm
+    focus: last_message
+    weight: 1
+    criteria: |
+      The answer says refunds over 5,000,000 VND need the manager, and smaller ones need the accounting lead, with a link or path to the wiki page or source.

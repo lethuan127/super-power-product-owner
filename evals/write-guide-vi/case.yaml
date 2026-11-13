@@ -1,0 +1,58 @@
+schema_version: "1.1"
+name: write-guide-vi
+tags: [guide, vi]
+runs: 2
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    Viết hướng dẫn sử dụng cho nhân viên bán hàng: cách hủy đơn.
+    Màn hình đơn hàng có nút "Cancel order". Một hộp thoại hỏi lý do ở ô "Reason", rồi bấm nút "Confirm".
+    Đơn đã giao thì không hủy được; màn hình hiện "Order already shipped".
+    Lưu vào output/huong-dan-huy-don.md.
+  max_turns: 30
+  timeout_seconds: 600
+  allowed_tools: [Skill, Read, Write, Edit, Glob, Grep, Bash]
+graders:
+  - name: fired-write-guide
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?write-guide"'
+    arm: with-only
+  - name: guide-file
+    type: file_exists
+    path: output/huong-dan-huy-don.md
+    exists: true
+  - name: button-kept
+    type: regex
+    target: {source: file, path: output/huong-dan-huy-don.md}
+    pattern: '\*\*Cancel order\*\*'
+    flags: "i"
+    match: contains
+    weight: 1
+  - name: vi-headings
+    type: regex
+    target: {source: file, path: output/huong-dan-huy-don.md}
+    pattern: 'Các bước'
+    flags: "i"
+    match: contains
+    weight: 1
+  - name: no-en-headings
+    type: regex
+    target: {source: file, path: output/huong-dan-huy-don.md}
+    pattern: '^#+\s*(Steps|Common mistakes|Help)\s*$'
+    flags: "im"
+    match: not_contains
+    weight: 1
+  - name: quality
+    type: llm
+    focus: {source: file, path: output/huong-dan-huy-don.md}
+    weight: 2
+    criteria: |
+      Pass if all four points hold. Judge nothing else.
+      1. The text and headings are Vietnamese.
+      2. "Cancel order", "Reason", "Confirm" and "Order already shipped" stay in English, as given.
+      3. The steps are numbered, with one action each.
+      4. A common-mistakes part covers "Order already shipped", and a help part exists.
+      The prompt does not give the result screen, the helper, or what to do with a shipped order.
+      A "?" there is the correct answer.

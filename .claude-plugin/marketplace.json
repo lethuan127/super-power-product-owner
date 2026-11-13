@@ -1,0 +1,14 @@
+{
+  "name": "super-power-product-owner",
+  "owner": {
+    "name": "lethuan127"
+  },
+  "description": "One plugin: Claude skills that take the repeat work off a Product Owner's week.",
+  "plugins": [
+    {
+      "name": "super-power-product-owner",
+      "source": "./",
+      "description": "Claude skills for a Product Owner: project wiki, user guides, list and money reconciliation."
+    }
+  ]
+}

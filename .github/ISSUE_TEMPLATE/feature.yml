@@ -1,0 +1,15 @@
+name: Feature
+description: A new job for the plugin, or a better way to do one.
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: "This page is public. Do not paste company names, customer data, amounts or people's names."
+  - type: textarea
+    id: job
+    attributes: {label: The job, description: "What do you do by hand today, and how often?"}
+    validations: {required: true}
+  - type: textarea
+    id: result
+    attributes: {label: The result you want}
+    validations: {required: true}

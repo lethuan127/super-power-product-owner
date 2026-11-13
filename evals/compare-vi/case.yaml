@@ -1,0 +1,60 @@
+schema_version: "1.1"
+name: compare-vi
+tags: [compare, money, vi]
+runs: 2
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    Đối soát orders.csv (file A, xuất từ hệ thống) với accounting.csv (file B, của kế toán).
+    Mình xác nhận: cột nối là "Invoice" ở cả hai file, cột số tiền là "Amount" ở cả hai, dấu thập phân auto.
+    Chạy đối soát luôn.
+  max_turns: 30
+  timeout_seconds: 600
+  allowed_tools: [Skill, Read, Write, Edit, Glob, Grep, Bash]
+graders:
+  - name: fired-compare-lists
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?compare-lists"'
+    arm: with-only
+  - name: ran-script
+    type: tool_used
+    tool: Bash
+    input_match: '--key-a'
+    min: 1
+  - name: total-a
+    type: regex
+    target: last_message
+    pattern: '1[,.]?657'
+    match: contains
+    weight: 1
+  - name: total-b
+    type: regex
+    target: last_message
+    pattern: '1[,.]?609'
+    match: contains
+    weight: 1
+  - name: vi-cause-label
+    type: regex
+    target: last_message
+    pattern: 'Cause:'
+    match: not_contains
+    weight: 1
+  - name: vi-cause
+    type: regex
+    target: last_message
+    pattern: '(Cause|Nguyên nhân):[^\n]*(maybe|probably|likely|perhaps|có thể|có lẽ)'
+    flags: "i"
+    match: not_contains
+    weight: 1
+  - name: report-vi
+    type: llm
+    focus: last_message
+    weight: 3
+    criteria: |
+      The report is written in Vietnamese, with Vietnamese row names in the table (such as "Khớp",
+      "Chỉ có ở A", "Chỉ có ở B", "Lệch số tiền"). It gives: 3 keys matched, 1 key only in A
+      (INV-4), 1 key only in B (INV-9), 0 keys with a different amount, and 1 line in file A with
+      no key. It mentions that INV-2 has more than one line, and that INV-3 has a negative amount
+      or credit note. Wording and layout do not matter otherwise.

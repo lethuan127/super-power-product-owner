@@ -1,0 +1,33 @@
+schema_version: "1.1"
+name: compare-low-match
+tags: [compare]
+runs: 2
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    Reconcile export.csv (A) with ledger.csv (B).
+    I confirm: link column "OrderNo" in A and "InvoiceNo" in B; amount column "Total" in both. Go ahead.
+  max_turns: 30
+  timeout_seconds: 600
+  allowed_tools: [Skill, Read, Write, Edit, Glob, Grep, Bash]
+graders:
+  - name: fired-compare-lists
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?compare-lists"'
+    arm: with-only
+  - name: ran-script
+    type: tool_used
+    tool: Bash
+    input_match: 'compare\.py'
+    min: 1
+  - name: stops
+    type: llm
+    focus: last_message
+    weight: 1
+    criteria: |
+      Pass if the reply says that few or no keys match, and asks the user whether the link column
+      is right or how the two files link. Showing sample keys, counts of unmatched lines, or
+      suggested ways to link the files is fine. Fail only if the reply presents the unmatched
+      lines as real missing records for the user to fix.

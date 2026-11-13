@@ -1,0 +1,7 @@
+Invoice,Order,Amount
+INV-1,O-1,100
+INV-2,O-2,200
+INV-2,O-3,300
+INV-3,O-4,1000
+INV-4,O-5,50
+,O-6,7

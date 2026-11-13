@@ -1,0 +1,30 @@
+schema_version: "1.1"
+name: compare-asks-columns
+tags: [compare, vi]
+runs: 2
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    đối soát file orders.csv với accounting.csv giúp mình
+  max_turns: 30
+  timeout_seconds: 600
+  allowed_tools: [Skill, Read, Write, Edit, Glob, Grep, Bash]
+graders:
+  - name: fired-compare-lists
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?compare-lists"'
+    arm: with-only
+  - name: no-compare-before-confirm
+    type: tool_used
+    tool: Bash
+    input_match: 'compare\.py\s+compare\b'
+    min: 0
+    max: 0
+  - name: asks
+    type: llm
+    focus: last_message
+    weight: 1
+    criteria: |
+      The reply shows or names the columns of the files, proposes a link column and an amount column, and asks the user to confirm before comparing. It is in Vietnamese.

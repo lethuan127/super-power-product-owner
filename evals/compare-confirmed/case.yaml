@@ -1,0 +1,59 @@
+schema_version: "1.1"
+name: compare-confirmed
+tags: [compare, money]
+runs: 2
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    Reconcile orders.csv (file A, product export) with accounting.csv (file B).
+    I confirm: the link column is "Invoice" in both files, the amount column is "Amount" in both, decimal mark auto.
+    Go ahead and compare.
+  max_turns: 30
+  timeout_seconds: 600
+  allowed_tools: [Skill, Read, Write, Edit, Glob, Grep, Bash]
+graders:
+  - name: fired-compare-lists
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?compare-lists"'
+    arm: with-only
+  - name: ran-script
+    type: tool_used
+    tool: Bash
+    input_match: 'compare\.py'
+    min: 1
+  - name: result-file
+    type: file_exists
+    path: "**/*compare*.xlsx"
+    exists: true
+  - name: total-a
+    type: regex
+    target: last_message
+    pattern: '1[,.]?657'
+    flags: "i"
+    match: contains
+    weight: 1
+  - name: total-b
+    type: regex
+    target: last_message
+    pattern: '1[,.]?609'
+    flags: "i"
+    match: contains
+    weight: 1
+  - name: numbers
+    type: llm
+    focus: last_message
+    weight: 3
+    criteria: |
+      The report gives these counts: 3 keys matched, 1 key only in A (INV-4), 1 key only in B (INV-9),
+      0 keys with a different amount, and 1 line in file A with no key.
+      It mentions that INV-2 has more than one line, and that INV-3 has a negative amount or credit note.
+      Pass if all of these are present. Wording and table layout do not matter.
+  - name: no-guessed-cause
+    type: regex
+    target: last_message
+    pattern: '(Cause|Nguyên nhân):[^\n]*(maybe|probably|likely|perhaps|có thể|có lẽ)'
+    flags: "i"
+    match: not_contains
+    weight: 1

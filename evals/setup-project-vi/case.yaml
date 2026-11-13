@@ -1,0 +1,40 @@
+schema_version: "1.1"
+name: setup-project-vi
+tags: [setup, vi]
+runs: 2
+execution:
+  prompt: |
+    thiết lập dự án Quản lý kho
+  max_turns: 30
+  timeout_seconds: 600
+  allowed_tools: [Skill, Read, Write, Edit, Glob, Grep, Bash]
+graders:
+  - name: fired-setup-project
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?setup-project"'
+    arm: with-only
+  - name: claude-md
+    type: file_exists
+    path: "CLAUDE.md"
+    exists: true
+  - name: schema-name
+    type: regex
+    target: {source: file, path: CLAUDE.md}
+    pattern: 'Quản lý kho'
+    flags: "i"
+    match: contains
+    weight: 1
+  - name: vietnamese
+    type: llm
+    focus: {source: file, path: CLAUDE.md}
+    weight: 1
+    criteria: |
+      The CLAUDE.md file sets the output language to Vietnamese.
+  - name: reply-vietnamese
+    type: llm
+    focus: last_message
+    weight: 1
+    criteria: |
+      The reply to the user is written in Vietnamese. It tells the user that the output language
+      is Vietnamese, and how to change it.

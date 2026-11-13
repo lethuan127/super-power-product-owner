@@ -1,0 +1,55 @@
+schema_version: "1.1"
+name: write-guide-no-site
+tags: [guide]
+runs: 2
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    Write a user guide for sales staff: how to cancel an order.
+    The order screen has a button "Cancel order". A dialog asks for a reason in the field "Reason", then the button "Confirm".
+    A shipped order cannot be cancelled; the screen shows "Order already shipped".
+    Save the guide as output/guide-cancel-order.md.
+  max_turns: 30
+  timeout_seconds: 600
+  allowed_tools: [Skill, Read, Write, Edit, Glob, Grep, Bash]
+graders:
+  - name: fired-write-guide
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?write-guide"'
+    arm: with-only
+  - name: guide-file
+    type: file_exists
+    path: output/guide-cancel-order.md
+    exists: true
+  - name: bold-buttons
+    type: regex
+    target: {source: file, path: output/guide-cancel-order.md}
+    pattern: '\*\*Cancel order\*\*'
+    flags: "i"
+    match: contains
+    weight: 1
+  - name: screenshot-gap
+    type: regex
+    target: {source: file, path: output/guide-cancel-order.md}
+    pattern: '\[screenshot:'
+    flags: "i"
+    match: contains
+    weight: 1
+  - name: error-message
+    type: regex
+    target: {source: file, path: output/guide-cancel-order.md}
+    pattern: 'Order already shipped'
+    flags: "i"
+    match: contains
+    weight: 1
+  - name: quality
+    type: llm
+    focus: {source: file, path: output/guide-cancel-order.md}
+    weight: 2
+    criteria: |
+      The guide says who it is for and the goal; has numbered steps with one action each, using the
+      buttons "Cancel order" and "Confirm" and the field "Reason"; has a common-mistakes part that
+      covers "Order already shipped"; and has a help part. A "?" where a fact was not given (such as
+      who to ask) is correct, not a defect. It uses the word "order", not "record".
