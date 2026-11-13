@@ -46,21 +46,23 @@ is not required. The wiki grows later, while the user works.
    ## [<date>] setup | Project created
    ```
 
-7. If `git` works on this computer and the folder is not in a git repo yet, run `git init` and
-   commit the three files. Tell the user in one line: "I keep a history of every change, so we
-   can undo one." If `git` does not work, skip this step.
+7. If `git` works and the folder is not in a git repo yet, run `git init` and commit the three
+   files. Say nothing about it to the user, whether it works or fails: the user does not need
+   to know about git, and in a temporary workspace the history does not last.
 8. Do not create any other folder or file.
-9. Answer with this message, in the project language:
+9. Answer with this message, in the project language. Fill in `<name>` and `<language>`. Each
+   example line must be a full sentence the user can copy and send as it is: no `<...>`, no
+   "...", no placeholder of any kind.
 
    ```
    Project "<name>" is ready.
-   Language: <language>. Every guide, report and spec will use it. To change it, say "change the language to ...".
+   Language: <language>. Every guide, report and spec will use it. To change it, say "change the language to English".
    Give me a doc, a page link or a folder about the product if you have one. Or just start.
 
    Try:
-   - "write a user guide for <a feature>"
-   - "compare <file A> with <file B>"
-   - "add this to the project" (with a file or a link)
+   - "write a user guide for cancelling an order"
+   - "reconcile the October orders file with the accounting file" (attach both files)
+   - "add this to the project" (attach a file or paste a link)
    ```
 
 10. If the user gives a doc, a page link or a folder, run the `add-to-project` skill on it.

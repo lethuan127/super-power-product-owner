@@ -33,6 +33,19 @@ Test these in Cowork before any skill is built. Each one changes the design if i
 | A skill installs `openpyxl` and reads an `.xlsx` file | ask the PO for CSV files |
 | The first user's product has a test site, and what data it holds | mark the site kind in `apps.md`; plan guides around it |
 
+**Results so far (2026-11-14, Cowork cloud, v0.2.0 from the GitHub marketplace):**
+
+- **Install: works.** The marketplace synced at the release commit, and the content scan passed.
+  The plugin starts switched off; the user must turn it on in Customize → Plugins.
+- **Sync: manual.** Cowork keeps the synced commit until a new sync. Auto sync needs the Claude
+  GitHub app on the repo.
+- **`setup-project` fires from "thiết lập dự án Thử nghiệm" and answers in Vietnamese.**
+- **The cloud workspace is temporary.** Claude saved the 3 wiki files to the Cowork Project by
+  itself, so the next session can read them. Open: does a new session read `CLAUDE.md` from the
+  Project? If not, the wiki needs a Project home in `setup-project` and `core`.
+- **Fixed in 0.2.1:** the reply showed `<file A>` placeholders, and promised an undo history that
+  a temporary workspace loses.
+
 ### Phase 1 — The base plus two Told skills (about 2 days)
 
 1. Build the plugin frame, `core` and `setup-project`.

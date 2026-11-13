@@ -54,3 +54,9 @@ graders:
     weight: 1
     criteria: |
       The reply says the project is ready, offers to take a doc or link, and gives example requests. It asks no required question.
+  - name: no-placeholders
+    type: regex
+    target: last_message
+    pattern: '<[^>\n]{1,40}>|\.\.\."'
+    match: not_contains
+    weight: 1

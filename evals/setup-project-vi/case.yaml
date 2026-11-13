@@ -38,3 +38,9 @@ graders:
     criteria: |
       The reply to the user is written in Vietnamese. It tells the user that the output language
       is Vietnamese, and how to change it.
+  - name: no-placeholders
+    type: regex
+    target: last_message
+    pattern: '<[^>\n]{1,40}>|\.\.\."'
+    match: not_contains
+    weight: 1
