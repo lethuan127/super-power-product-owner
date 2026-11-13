@@ -56,3 +56,10 @@ graders:
       4. A common-mistakes part covers "Order already shipped", and a help part exists.
       The prompt does not give the result screen, the helper, or what to do with a shipped order.
       A "?" there is the correct answer.
+  - name: suggested-mistakes
+    type: regex
+    target: {source: file, path: output/huong-dan-huy-don.md}
+    pattern: '\(cần xác nhận\)'
+    flags: "i"
+    match: contains
+    weight: 1

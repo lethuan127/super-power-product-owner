@@ -63,10 +63,12 @@ the user's business.
       python3 -c "import urllib.parse,sys; print('https://github.com/lethuan127/super-power-product-owner/issues/new?' + urllib.parse.urlencode({'title': sys.argv[1], 'body': open(sys.argv[2]).read(), 'labels': sys.argv[3]}))" "<title>" "<body file>" "<kind>"
       ```
 
-      Give the user the link. Say: "Open it, log in to GitHub, and press **Create**." If the
-      user has no GitHub account, save the draft as `feedback-<YYYY-MM-DD>.md` in the
-      project's output place, and ask the user to send that file to the person who installed
-      the plugin.
+      Also save the draft as `feedback-<YYYY-MM-DD>.md` in the project's output place. Give the
+      user both, in this order:
+      - "Have a GitHub account? Open this link, log in, and press **Create**."
+      - "No GitHub account? Send this file to the person who installed the plugin."
+      Then say once: "To send feedback with no extra step next time, ask the person who
+      installed the plugin to connect GitHub to this app."
 6. Give the user the issue link, or the file path. Add one `feedback` line to `log.md` if a
    project exists.
 

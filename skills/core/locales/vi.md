@@ -33,6 +33,7 @@ every guide and report reads the same. The rules in `plain-writing.md` still app
 | Biggest gaps | Chênh lệch lớn nhất |
 | difference | chênh lệch |
 | Cause: ? | Nguyên nhân: ? |
+| (to confirm) | (cần xác nhận) |
 | All lines counted, totals agree | Đã tính đủ mọi dòng, tổng khớp |
 | Result file | File kết quả |
 | screenshot | ảnh màn hình |

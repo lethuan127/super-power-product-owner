@@ -74,6 +74,9 @@ Checks and rules for a change: [CONTRIBUTING.md](./CONTRIBUTING.md). Security re
 
 ## Versions
 
+- **0.2.2:** `write-guide` never leaves "Common mistakes" empty: it adds 2 to 4 likely
+  mistakes, each marked "(to confirm)" (#1). `send-feedback` gives a user with no GitHub
+  account a saved file next to the link.
 - **0.2.1:** `setup-project` gives example lines the user can send as they are, and says
   nothing about git. In a temporary workspace with a Project attached, the wiki lives in the
   Project's files. `add-to-project` saves a redacted copy of each source there, so every source

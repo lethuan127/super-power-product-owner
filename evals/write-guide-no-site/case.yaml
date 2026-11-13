@@ -53,3 +53,10 @@ graders:
       buttons "Cancel order" and "Confirm" and the field "Reason"; has a common-mistakes part that
       covers "Order already shipped"; and has a help part. A "?" where a fact was not given (such as
       who to ask) is correct, not a defect. It uses the word "order", not "record".
+  - name: suggested-mistakes
+    type: regex
+    target: {source: file, path: output/guide-cancel-order.md}
+    pattern: '\(to confirm\)'
+    flags: "i"
+    match: contains
+    weight: 1

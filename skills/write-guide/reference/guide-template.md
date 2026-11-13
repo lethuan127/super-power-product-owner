@@ -24,6 +24,7 @@ Write the headings in the project language. Keep the four parts in this order.
 | You see | Why | What to do |
 |---|---|---|
 | "<exact error message>" | <cause> | <fix> |
+| <a likely mistake> (to confirm) | <likely cause> | <likely fix> |
 
 ## Help
 
@@ -36,3 +37,6 @@ Rules:
 - Bold every button and field name, exactly as the screen shows it.
 - Put a warning before the step it protects, never after.
 - Keep the guide under about 15 steps. Split a longer task into two guides.
+- Fill "Common mistakes" with every error the input gives. Then add 2 to 4 likely mistakes for
+  this task, such as the wrong record picked, a required field left empty, or a step done out of
+  order. Mark each one "(to confirm)". Never leave the table empty.

@@ -58,4 +58,6 @@ This skill has two modes. Pick one from the user's words:
 - The guide uses the readers' words, not developer words.
 - Every screenshot uses test data, or has customer data blurred.
 - Every `[screenshot: ...]` gap is listed for the user.
+- "Common mistakes" is not empty. Every row the input did not give is marked "(to confirm)", and
+  the user is asked to confirm or remove those rows.
 - In update mode: every guide the wiki links to the feature was checked.
