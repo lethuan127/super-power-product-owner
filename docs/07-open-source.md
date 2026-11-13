@@ -51,17 +51,17 @@ A clean tree proves nothing. Old commits keep every deleted line.
 
 | Check | Level | This repo |
 |---|---|---|
-| Description and topics | ⚠️ | ❌ Empty. Waits for a "yes" |
-| Private vulnerability reporting on | ⚠️ | ❌ Off. Waits for a "yes" |
-| Secret scanning and push protection on | ⚠️ | ❌ Off. Waits for a "yes" |
+| Description and topics | ⚠️ | ✅ Set on 2026-11-14. 8 topics, plus a social preview image |
+| Private vulnerability reporting on | ⚠️ | ✅ On |
+| Secret scanning and push protection on | ⚠️ | ✅ On |
 | Branch protection on `main` requires CI | 📝 | Skipped. One maintainer pushes to `main` directly |
-| Wiki turned off, if unused | 📝 | ❌ On, unused. Waits for a "yes" |
+| Wiki turned off, if unused | 📝 | ✅ Off |
 
 ## 5. After publishing: sustain
 
 | Check | Level | This repo |
 |---|---|---|
-| Clone the public URL and scan what landed | ⚠️ | Run after the next push |
+| Clone the public URL and scan what landed | ⚠️ | ✅ Done on 2026-11-14: 1 commit, 0 company names, checks pass |
 | A fixed time to read new issues | ⚠️ | Plan: once a week. Feedback from `send-feedback` lands as issues |
 | Releases follow version numbers, with notes | 📝 | The "Versions" part of the plugin README |
 
