@@ -4,7 +4,8 @@
 plugin.
 
 1. **Wiki first.** Find the project: a `CLAUDE.md` with a "Project wiki" section, in the working
-   folder or a folder the user names. Read it, then `index.md`, then only the pages the job
+   folder, in the attached Project's files, or in a folder the user names. See "Where the wiki
+   lives" in `project-wiki.md`. Read it, then `index.md`, then only the pages the job
    needs. If no project exists, offer to run the `setup-project` skill. If the user says no, do
    the job without a wiki.
 2. **Then the knowledge base, then the user.** For a missing fact, search the connected knowledge

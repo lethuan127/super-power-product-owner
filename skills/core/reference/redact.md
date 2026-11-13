@@ -2,7 +2,7 @@
 
 ## What to remove
 
-Remove these from **quotes** and from **wiki pages**:
+Remove these from **quotes**, **wiki pages** and **source copies**:
 
 - a person's name: write the role, such as "the accounting lead" or "a sales staff member";
 - a phone number: write `[phone]`;

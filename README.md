@@ -75,7 +75,9 @@ Checks and rules for a change: [CONTRIBUTING.md](./CONTRIBUTING.md). Security re
 ## Versions
 
 - **0.2.1:** `setup-project` gives example lines the user can send as they are, and says
-  nothing about git.
+  nothing about git. In a temporary workspace with a Project attached, the wiki lives in the
+  Project's files. `add-to-project` saves a redacted copy of each source there, so every source
+  the wiki cites survives the session.
 - **0.2.0:** `send-feedback` turns the user's feedback into a GitHub issue, after a "yes" and
   with private data removed. Output follows the project language; `core/locales/vi.md` sets the
   Vietnamese headings, number and date formats. `setup-project` tells the user the language and

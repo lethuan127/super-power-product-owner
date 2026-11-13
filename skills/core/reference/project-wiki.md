@@ -11,12 +11,25 @@ project. It has three layers:
 
 ## Contents
 
+- [Where the wiki lives](#where-the-wiki-lives)
 - [Find the files](#find-the-files)
 - [Read](#read)
 - [Find a missing fact](#find-a-missing-fact)
 - [Write a fact](#write-a-fact)
 - [Log a change](#log-a-change)
 - [Page rules](#page-rules)
+
+## Where the wiki lives
+
+Usually the wiki lives in the working folder. Some sessions run in a temporary workspace that
+is deleted when the session ends, such as a cloud session with a Project attached. There, the
+Project's files are the wiki's home:
+
+1. At the start, look for `CLAUDE.md` in the Project's files too. Copy the wiki files you need
+   into the workspace before you read them.
+2. After every change, save each changed file back to the Project: wiki pages, `index.md`,
+   `log.md`, and source copies. A file that stays only in the workspace is lost.
+3. Never tell the user a change can be undone from history in a temporary workspace.
 
 ## Find the files
 
