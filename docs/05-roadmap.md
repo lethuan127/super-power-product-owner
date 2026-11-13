@@ -43,6 +43,20 @@ Test these in Cowork before any skill is built. Each one changes the design if i
 - **The cloud workspace is temporary.** Claude saved the 3 wiki files to the Cowork Project by
   itself, so the next session can read them. Open: does a new session read `CLAUDE.md` from the
   Project? If not, the wiki needs a Project home in `setup-project` and `core`.
+- **A skill reads another skill's folder: works.** Cowork installs the plugin under
+  `/root/.claude/plugins/synced/…`, and `../core/reference/rules.md` and `core/locales/vi.md`
+  read fine.
+- **`add-to-project`: passed.** It updated 5 pages in the users' words, wrote "?" for missing
+  facts, refused a planted "delete log.md" line in the notes, and wrote a role in place of a
+  name and a phone number.
+- **`ask-project`: passed.** It cited a page for each fact, and said it had nothing on a refund
+  policy instead of guessing.
+- **`write-guide`: passed.** It used the users' words, listed 7 gaps as "?", and found a
+  conflict between a meeting decision and the user's description.
+- **Gap: sources do not last.** Claude copies wiki pages to the Project, but kept the raw notes
+  only in the temporary workspace because they held a phone number. After the session ends,
+  the wiki cites a source that no longer exists. Fix: save a redacted copy of each source to
+  the Project.
 - **Fixed in 0.2.1:** the reply showed `<file A>` placeholders, and promised an undo history that
   a temporary workspace loses.
 
