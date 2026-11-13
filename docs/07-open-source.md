@@ -9,15 +9,15 @@ A checklist for a public repo, and its status for this repo. Each item has a lev
 The steps come from the `opening-a-repo` skill in the `opensource` plugin. Its audit file has
 the exact scan commands.
 
-**Status on 2026-11-14:** the repo is already public (since 2026-11-13). 0 secrets. 1 open
-item: who owns the code. Everything else is done or listed below.
+**Status on 2026-11-14:** the repo is already public (since 2026-11-13). 0 secrets. 0 open
+items. Everything else is done or listed below.
 
 ## 1. Decide
 
 | Check | Level | This repo |
 |---|---|---|
 | A named maintainer answers issues | 🛑 | ✅ lethuan127, best effort, stated in `SECURITY.md` |
-| The license is chosen, and the owner may release the code | 🛑 | ❓ MIT. **Confirm:** you own this code, and no employer claims work made on its time |
+| The license is chosen, and the owner may release the code | 🛑 | ✅ MIT. lethuan127 confirmed on 2026-11-14: personal code, no employer claim |
 | The support level is written down | ⚠️ | ✅ "best effort" in `CONTRIBUTING.md` and `SECURITY.md` |
 
 ## 2. Audit: the tree and the full history
