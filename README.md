@@ -1,3 +1,5 @@
+<p align="center"><img src="./assets/banner.svg" alt="super-power-product-owner: Claude skills that take the repeat work off a Product Owner's week" width="100%"></p>
+
 # super-power-product-owner
 
 Tiếng Việt: [README.vi.md](./README.vi.md)

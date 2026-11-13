@@ -1,3 +1,5 @@
+<p align="center"><img src="./assets/banner.svg" alt="super-power-product-owner: kỹ năng Claude giúp PO bớt việc lặp lại mỗi tuần" width="100%"></p>
+
 # super-power-product-owner (tiếng Việt)
 
 Bộ kỹ năng cho Claude, giúp Product Owner (PO) bớt việc lặp lại mỗi tuần.
