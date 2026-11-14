@@ -74,6 +74,10 @@ Checks and rules for a change: [CONTRIBUTING.md](./CONTRIBUTING.md). Security re
 
 ## Versions
 
+- **0.2.3:** `send-feedback` drafts an issue the maintainer can act on without asking back: an
+  impact line, steps to reproduce, an excerpt of the wrong output, and "Done when" checks. It
+  comments on an open issue about the same problem instead of filing a new one. It also tells
+  the user what happened to feedback they sent.
 - **0.2.2:** `write-guide` never leaves "Common mistakes" empty: it adds 2 to 4 likely
   mistakes, each marked "(to confirm)" (#1). `send-feedback` gives a user with no GitHub
   account a saved file next to the link.

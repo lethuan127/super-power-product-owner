@@ -11,6 +11,15 @@ request, so we agree on the change first.
 
 Never paste real company names, customer data, amounts or people's names into an issue.
 
+## Close an issue
+
+Close every issue with one comment, so the reporter learns the outcome. `send-feedback` reads
+that comment when a user asks what happened to their feedback.
+
+- `Fixed in <version>: <what changed>. Checked: <how>.`
+- `Won't fix: <reason>.`
+- `Duplicate of #<n>.`
+
 ## Run the checks
 
 ```bash
