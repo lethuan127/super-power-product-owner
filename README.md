@@ -74,6 +74,8 @@ Checks and rules for a change: [CONTRIBUTING.md](./CONTRIBUTING.md). Security re
 
 ## Versions
 
+- **0.2.5:** `send-feedback` handles a sandbox that routes GitHub through `add_repo`, and falls back to
+  the web fetch tool. Its description now says to check feedback status here first.
 - **0.2.4:** `send-feedback` reads GitHub through the public API when `gh` and a connector are missing, so "what happened to my feedback?" works in Cowork.
 - **0.2.3:** `send-feedback` drafts an issue the maintainer can act on without asking back: an
   impact line, steps to reproduce, an excerpt of the wrong output, and "Done when" checks. It

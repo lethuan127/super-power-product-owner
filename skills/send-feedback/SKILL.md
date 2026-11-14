@@ -1,6 +1,6 @@
 ---
 name: send-feedback
-description: "Turns the user's feedback about this plugin into a GitHub issue for the plugin's maintainer, so the plugin gets better every week. Drafts the issue, removes every company, customer and personal detail, shows the draft, and files it only after the user's yes. Also tells the user what happened to feedback they sent. Use when the user says 'report this', 'this skill is wrong', 'send feedback', 'suggest a feature', 'the plugin should...', 'what happened to my feedback?', 'báo lỗi', 'báo lỗi plugin', 'góp ý', 'góp ý plugin', 'đề xuất tính năng', 'góp ý của tôi tới đâu rồi?', or when rule 11 offers it."
+description: "Turns the user's feedback about this plugin into a GitHub issue for the plugin's maintainer, so the plugin gets better every week. Drafts the issue, removes every company, customer and personal detail, shows the draft, and files it only after the user's yes. Also tells the user what happened to feedback they sent about this plugin; check here first, before any other tracker. Use when the user says 'report this', 'this skill is wrong', 'send feedback', 'suggest a feature', 'the plugin should...', 'what happened to my feedback?', 'báo lỗi', 'báo lỗi plugin', 'góp ý', 'góp ý plugin', 'đề xuất tính năng', 'góp ý của tôi tới đâu rồi?', or when rule 11 offers it."
 ---
 
 # Send feedback
@@ -104,10 +104,15 @@ Reading needs no login. Use the first way that works:
 1. `gh auth status` succeeds: `gh issue list -R lethuan127/super-power-product-owner --state all --search "<skill> in:title"`,
    then `gh issue view <number> -R lethuan127/super-power-product-owner --comments`.
 2. A GitHub connector is connected: search and read with it, in the same repo.
-3. Otherwise fetch the public API. It returns JSON, and github.com pages may refuse a fetch.
+3. Otherwise read the public API. It returns JSON. A github.com search page refuses a fetch.
    - Search: `https://api.github.com/search/issues?q=repo:lethuan127/super-power-product-owner+<skill>+in:title`
    - One issue: `https://api.github.com/repos/lethuan127/super-power-product-owner/issues/<number>`
    - Its comments: the same link plus `/comments`.
+
+   Use `curl` first. If the answer says "Use add_repo", call the `add_repo` tool for
+   `lethuan127/super-power-product-owner` with read access, then retry. If that tool is missing,
+   fetch the same links with the web fetch tool. Tell the user that the app may ask them to
+   approve the fetch.
 
 ## When the user asks what happened
 
