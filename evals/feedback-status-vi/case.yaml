@@ -1,0 +1,32 @@
+schema_version: "1.1"
+name: feedback-status-vi
+tags: [feedback, vi]
+runs: 2
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    góp ý của tôi về write-guide tới đâu rồi?
+  max_turns: 15
+  timeout_seconds: 600
+  allowed_tools: [Skill, Read, Write, Edit, Glob, Grep, Bash, WebFetch]
+graders:
+  - name: fired-feedback-status
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?feedback-status"'
+    arm: with-only
+  - name: issue-link
+    type: regex
+    target: last_message
+    pattern: 'github\.com/lethuan127/super-power-product-owner/issues/1\b'
+    match: contains
+  - name: names-the-fix
+    type: llm
+    focus: last_message
+    weight: 2
+    criteria: |
+      The reply is in Vietnamese. It says the feedback (issue #1) is closed and was fixed in
+      version 0.2.2, and says in plain words what changed: the guide now suggests likely
+      mistakes marked to be confirmed. Fail if it only repeats that the project log has a
+      feedback line, or if it says it could not find the issue.

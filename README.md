@@ -41,6 +41,7 @@ or `thiết lập dự án Order System`. Then ask for real work at once.
 | `write-guide` | "write a user guide for X" / "update the guides after this change" | a step-by-step guide, or the list of broken steps |
 | `compare-lists` | "reconcile file A with file B" | four tables: matched, only in A, only in B, amount differs |
 | `send-feedback` | "report this" / "suggest a feature" | a GitHub issue for the maintainer, with private data removed, sent after your "yes" |
+| `feedback-status` | "what happened to my feedback?" | the issue's state from GitHub: not looked at yet, fixed in a version, or won't fix |
 | `core` | (not called directly) | the shared rules every skill follows |
 
 ## Safety
@@ -74,6 +75,9 @@ Checks and rules for a change: [CONTRIBUTING.md](./CONTRIBUTING.md). Security re
 
 ## Versions
 
+- **0.3.0:** new skill `feedback-status` answers "what happened to my feedback?" from the
+  GitHub issue, never from `log.md` alone. Inside `send-feedback`, the status part did not
+  fire. `core/reference/github.md` holds the ways to read the repo, for both skills.
 - **0.2.5:** `send-feedback` handles a sandbox that routes GitHub through `add_repo`, and falls back to
   the web fetch tool. Its description now says to check feedback status here first.
 - **0.2.4:** `send-feedback` reads GitHub through the public API when `gh` and a connector are missing, so "what happened to my feedback?" works in Cowork.

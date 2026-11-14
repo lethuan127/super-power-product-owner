@@ -1,12 +1,13 @@
 ---
 name: send-feedback
-description: "Turns the user's feedback about this plugin into a GitHub issue for the plugin's maintainer, so the plugin gets better every week. Drafts the issue, removes every company, customer and personal detail, shows the draft, and files it only after the user's yes. Also tells the user what happened to feedback they sent about this plugin; check here first, before any other tracker. Use when the user says 'report this', 'this skill is wrong', 'send feedback', 'suggest a feature', 'the plugin should...', 'what happened to my feedback?', 'báo lỗi', 'báo lỗi plugin', 'góp ý', 'góp ý plugin', 'đề xuất tính năng', 'góp ý của tôi tới đâu rồi?', or when rule 11 offers it."
+description: "Turns the user's feedback about this plugin into a GitHub issue for the plugin's maintainer, so the plugin gets better every week. Drafts the issue, removes every company, customer and personal detail, shows the draft, and files it only after the user's yes. Use when the user says 'report this', 'this skill is wrong', 'send feedback', 'suggest a feature', 'the plugin should...', 'báo lỗi', 'báo lỗi plugin', 'góp ý', 'góp ý plugin', 'đề xuất tính năng', or when rule 11 offers it."
 ---
 
 # Send feedback
 
 Read [../core/reference/rules.md](../core/reference/rules.md) first. Also read
-[../core/reference/redact.md](../core/reference/redact.md).
+[../core/reference/redact.md](../core/reference/redact.md) and
+[../core/reference/github.md](../core/reference/github.md).
 
 The issue goes to `lethuan127/super-power-product-owner`. **That repo is public.** Anyone on
 the internet can read the issue, forever. So the issue describes how the plugin behaved, never
@@ -69,7 +70,7 @@ and tell when it is fixed. The draft has one section for each.
    - file names and paths that name the business → "<file A>";
    - links to the user's own apps and sites → "<internal link>";
    - examples: never reuse a real value as an example. Write a made-up one, such as `1.234.567`.
-4. Look for the same problem among open issues, with the first way in "Read the repo" below.
+4. Look for the same problem among open issues, with `github.md`.
    Search for `<skill>`. If an open issue describes the same behavior, plan to add a comment
    there instead of a new issue, and tell the user its link.
 5. Show the user the full draft. Say: "This goes to a public GitHub page. Check that nothing
@@ -97,34 +98,6 @@ and tell when it is fixed. The draft has one section for each.
 7. Give the user the issue link, or the file path. Add one `feedback` line to `log.md` if a
    project exists, with the link or the file name.
 
-## Read the repo
-
-Reading needs no login. Use the first way that works:
-
-1. `gh auth status` succeeds: `gh issue list -R lethuan127/super-power-product-owner --state all --search "<skill> in:title"`,
-   then `gh issue view <number> -R lethuan127/super-power-product-owner --comments`.
-2. A GitHub connector is connected: search and read with it, in the same repo.
-3. Otherwise read the public API. It returns JSON. A github.com search page refuses a fetch.
-   - Search: `https://api.github.com/search/issues?q=repo:lethuan127/super-power-product-owner+<skill>+in:title`
-   - One issue: `https://api.github.com/repos/lethuan127/super-power-product-owner/issues/<number>`
-   - Its comments: the same link plus `/comments`.
-
-   Use `curl` first. If the answer says "Use add_repo", call the `add_repo` tool for
-   `lethuan127/super-power-product-owner` with read access, then retry. If that tool is missing,
-   fetch the same links with the web fetch tool. Tell the user that the app may ask them to
-   approve the fetch.
-
-## When the user asks what happened
-
-1. Find the issue: the link in `log.md` or the chat. With no link, search for the skill, with
-   "Read the repo".
-2. Read the issue and its comments, with "Read the repo".
-3. Answer in one or two plain sentences, in the user's language:
-   - open, with no comment from the maintainer: "Not looked at yet";
-   - open, with a comment: what the comment says;
-   - closed with "Fixed in <version>": what changed, and that it works after the plugin updates;
-   - closed with "Won't fix": the reason.
-
 ## Done when
 
 - The user saw the final draft and said yes before anything left this computer.
@@ -132,3 +105,4 @@ Reading needs no login. Use the first way that works:
   user's work, not even as an example.
 - The draft has an impact line, steps to reproduce, an excerpt, and at least one "Done when" check.
 - The user has the issue link, the comment link, the form link, or the file path.
+- The `log.md` line has that link or file name, so `feedback-status` can find it later.
