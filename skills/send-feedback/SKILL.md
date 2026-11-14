@@ -69,10 +69,9 @@ and tell when it is fixed. The draft has one section for each.
    - file names and paths that name the business → "<file A>";
    - links to the user's own apps and sites → "<internal link>";
    - examples: never reuse a real value as an example. Write a made-up one, such as `1.234.567`.
-4. Look for the same problem. If `gh auth status` succeeds, run
-   `gh issue list -R lethuan127/super-power-product-owner --state open --search "<skill> in:title"`.
-   If an open issue describes the same behavior, plan to add a comment there instead of a new
-   issue, and tell the user its link.
+4. Look for the same problem among open issues, with the first way in "Read the repo" below.
+   Search for `<skill>`. If an open issue describes the same behavior, plan to add a comment
+   there instead of a new issue, and tell the user its link.
 5. Show the user the full draft. Say: "This goes to a public GitHub page. Check that nothing
    private is left. Reply yes to send it." Wait for the yes. Apply every change the user asks
    for, and show the draft again.
@@ -98,11 +97,23 @@ and tell when it is fixed. The draft has one section for each.
 7. Give the user the issue link, or the file path. Add one `feedback` line to `log.md` if a
    project exists, with the link or the file name.
 
+## Read the repo
+
+Reading needs no login. Use the first way that works:
+
+1. `gh auth status` succeeds: `gh issue list -R lethuan127/super-power-product-owner --state all --search "<skill> in:title"`,
+   then `gh issue view <number> -R lethuan127/super-power-product-owner --comments`.
+2. A GitHub connector is connected: search and read with it, in the same repo.
+3. Otherwise fetch the public API. It returns JSON, and github.com pages may refuse a fetch.
+   - Search: `https://api.github.com/search/issues?q=repo:lethuan127/super-power-product-owner+<skill>+in:title`
+   - One issue: `https://api.github.com/repos/lethuan127/super-power-product-owner/issues/<number>`
+   - Its comments: the same link plus `/comments`.
+
 ## When the user asks what happened
 
-1. Find the issue: the link in `log.md`, the chat, or
-   `gh issue list -R lethuan127/super-power-product-owner --state all --search "<skill> in:title"`.
-2. Read it with `gh issue view <number> --comments`, a GitHub connector, or the public page.
+1. Find the issue: the link in `log.md` or the chat. With no link, search for the skill, with
+   "Read the repo".
+2. Read the issue and its comments, with "Read the repo".
 3. Answer in one or two plain sentences, in the user's language:
    - open, with no comment from the maintainer: "Not looked at yet";
    - open, with a comment: what the comment says;

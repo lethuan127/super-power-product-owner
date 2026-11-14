@@ -74,6 +74,7 @@ Checks and rules for a change: [CONTRIBUTING.md](./CONTRIBUTING.md). Security re
 
 ## Versions
 
+- **0.2.4:** `send-feedback` reads GitHub through the public API when `gh` and a connector are missing, so "what happened to my feedback?" works in Cowork.
 - **0.2.3:** `send-feedback` drafts an issue the maintainer can act on without asking back: an
   impact line, steps to reproduce, an excerpt of the wrong output, and "Done when" checks. It
   comments on an open issue about the same problem instead of filing a new one. It also tells
